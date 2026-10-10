@@ -2,6 +2,7 @@
   "routes": [
     { "path": "/", "title": "ALAN.AI" },
     { "path": "/login", "title": "Sign in" },
+    { "path": "/preview/dashboard", "title": "Sample dashboard preview" },
     { "path": "/register", "title": "Create student account" },
     { "path": "/forgot-password", "title": "Reset password" },
     { "path": "/reset-password", "title": "Choose a new password" },
