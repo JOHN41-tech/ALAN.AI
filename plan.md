@@ -15,6 +15,7 @@ Supabase is an explicitly requested external dependency. Protected project setti
 ## Routes and user experiences
 
 - Public: `/` landing page; `/login`, `/register`, `/forgot-password`, `/reset-password`, and `/auth/callback` authentication flows.
+- Public visual demonstration: `/preview/dashboard` shows the signed-in student dashboard shell with clearly labeled synthetic data only; it is read-only, never authenticates or writes data, and links back to the real sign-in flow.
 - Academic application: `/app` role-aware redirect; `/dashboard`; `/timetable`; `/calendar`; `/announcements` plus `/announcements/[announcementId]`; `/attendance`; `/profile`; `/notifications`.
 - Career application: `/career`, `/career/opportunities`, `/career/discovery`, `/career/roadmaps` and `/career/roadmaps/[roadmapId]`, `/career/resources`, `/career/assessments`, `/career/interviews`, and `/career/companion`.
 - Faculty: `/faculty/classes` and `/faculty/attendance/[sessionId]` for assigned classes and reviewed attendance submission.
