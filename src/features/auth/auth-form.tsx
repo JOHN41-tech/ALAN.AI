@@ -38,8 +38,29 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
     setBusy(true);
     try {
       if (mode === "login") {
-        const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error: authError } = await supabase.auth.signInWithPassword({ email, password });
         if (authError) throw authError;
+        if (!data.user) throw new Error("Supabase did not return a signed-in account. Please try again.");
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("account_status")
+          .eq("id", data.user.id)
+          .maybeSingle();
+        if (profileError) {
+          await supabase.auth.signOut();
+          if (profileError.code === "PGRST205") {
+            throw new Error("Your credentials were accepted, but ALAN.AI's profile database has not been installed yet. Ask your campus administrator to apply the Supabase migrations.");
+          }
+          throw new Error("Your credentials were accepted, but your ALAN.AI profile could not be loaded. Ask your campus administrator to finish setup.");
+        }
+        if (!profile) {
+          await supabase.auth.signOut();
+          throw new Error("Your credentials were accepted, but no ALAN.AI profile exists for this account. Ask your campus administrator to provision your profile.");
+        }
+        if (profile.account_status !== "active") {
+          await supabase.auth.signOut();
+          throw new Error(profile.account_status === "suspended" ? "This account is suspended. Contact your campus administrator." : "This account is awaiting activation. Contact your campus administrator.");
+        }
         router.replace("/app");
         router.refresh();
       } else if (mode === "register") {

@@ -135,7 +135,6 @@ export default function SampleDashboardPreview() {
             <section className="surface sample-career-card">
               <div className="sample-career-icon"><BriefcaseBusiness size={20} /></div>
               <div><span className="eyebrow">Career &amp; learning</span><h2>Your next chapter, alongside your college day.</h2><p>Explore roadmaps, verified opportunities, learning resources, assessments, mock interviews and the AI companion from one workspace.</p></div>
-              <Link className="button button--secondary" href="/login">Sign in to explore <ArrowRight size={15} /></Link>
             </section>
 
             <footer className="sample-preview-footer">Design preview only · Synthetic sample data · No account access or database changes</footer>
